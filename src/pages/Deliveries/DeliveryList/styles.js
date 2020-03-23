@@ -5,7 +5,6 @@ import { colors, metrics } from '~/styles';
 export const Container = styled.View`
   margin-top: ${metrics.baseMargin}px;
   flex: 1;
-  /* margin-bottom: ${metrics.baseMargin * 10}px; */
 `;
 
 export const Box = styled.View`

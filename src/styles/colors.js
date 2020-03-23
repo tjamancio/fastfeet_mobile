@@ -8,4 +8,5 @@ export default {
   grayLight: '#BDBDBD',
   dark: '#444',
   red: '#e74040',
+  gold: '#e7ba40',
 };

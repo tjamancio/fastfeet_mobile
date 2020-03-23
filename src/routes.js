@@ -8,7 +8,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
 
 import Deliveries from './pages/Deliveries';
-import Delivery from './pages/Delivery';
+import DeliveryDetail from './pages/DeliveryDetail';
+import DeliveryProblems from './pages/DeliveryProblems';
+import NewDeliveryProblem from './pages/NewDeliveryProblem';
 import Profile from './pages/Profile';
 import Signin from './pages/Signin';
 import { navigationRef } from './services/RootNavigation';
@@ -27,7 +29,33 @@ const DeliveryTab = () => (
         tabBarVisible: false,
       }}
     />
-    <Stack.Screen name="Delivery" component={Delivery} />
+    <Stack.Screen
+      name="DeliveryDetail"
+      component={DeliveryDetail}
+      options={{
+        title: 'Detalhes da encomenda',
+        headerTransparent: true,
+        headerTintColor: colors.white,
+      }}
+    />
+    <Stack.Screen
+      name="NewDeliveryProblem"
+      component={NewDeliveryProblem}
+      options={{
+        title: 'Informar Problema',
+        headerTransparent: true,
+        headerTintColor: colors.white,
+      }}
+    />
+    <Stack.Screen
+      name="DeliveryProblems"
+      component={DeliveryProblems}
+      options={{
+        title: 'Visualizar Problemas',
+        headerTransparent: true,
+        headerTintColor: colors.white,
+      }}
+    />
   </Stack.Navigator>
 );
 

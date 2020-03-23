@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+
 import styled from 'styled-components/native';
 
 import { colors, metrics } from '~/styles';

@@ -43,9 +43,25 @@ class DeliveryList extends Component {
     };
   }
 
-  async load() {
-    const { status, page, deliveries } = this.state;
-    const { user } = this.props;
+  componentDidMount() {
+    this.load();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { status } = this.props;
+    if (prevProps.status !== status) {
+      this.updateStatus();
+    }
+  }
+
+  updateStatus = () => {
+    this.setState({ page: 1, deliveries: [] });
+    this.load();
+  };
+
+  load = async () => {
+    const { page, deliveries } = this.state;
+    const { user, status } = this.props;
 
     this.setState({ loading: true });
 
@@ -58,16 +74,17 @@ class DeliveryList extends Component {
     this.setState({
       deliveries: [...deliveries, ...data],
       loading: false,
+      page: data.length > 0 ? page + 1 : page,
     });
-  }
+  };
 
-  handleSeeDetaisClick() {
-    navigate('Delivery');
-  }
+  handleSeeDetaisClick = delivery => {
+    navigate('DeliveryDetail', { delivery });
+  };
 
   keyExtractor = item => String(item.id);
 
-  renderItem({ item }) {
+  renderItem = ({ item }) => {
     return (
       <>
         <Box>
@@ -109,16 +126,16 @@ class DeliveryList extends Component {
 
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={this.handleSeeDetaisClick}>
+              onPress={() => this.handleSeeDetaisClick(item)}>
               <SeeDetais>Ver detalhes</SeeDetais>
             </TouchableOpacity>
           </Detais>
         </Box>
       </>
     );
-  }
+  };
 
-  renderFooter() {
+  renderFooter = () => {
     const { loading } = this.state;
     if (!loading) {
       return null;
@@ -128,7 +145,7 @@ class DeliveryList extends Component {
         <ActivityIndicator />
       </Footer>
     );
-  }
+  };
 
   render() {
     const { deliveries } = this.state;
@@ -149,6 +166,9 @@ class DeliveryList extends Component {
 
 DeliveryList.propTypes = {
   status: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({

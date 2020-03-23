@@ -3,7 +3,9 @@ import styled from 'styled-components/native';
 
 import { colors, metrics } from '~/styles';
 
-export const Container = styled(BaseButton)`
+export const Container = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
   height: 45px;
   background: ${({ background }) => background};
   border-radius: ${metrics.baseRadius}px;

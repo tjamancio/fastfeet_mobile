@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { View, StatusBar, TouchableOpacity } from 'react-native';
 
-import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -26,6 +26,8 @@ export default function Deliveries() {
   const user = useSelector(state => state.user.profile);
 
   const [deliveryStatus, setDeliveryStatus] = useState('pendente');
+
+  console.tron.log('teste');
 
   function handleLogoutClick() {
     dispatch(signOut());

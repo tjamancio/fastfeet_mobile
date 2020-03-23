@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
 import { StatusBar, Image } from 'react-native';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '~/assets/fastfeet-logo.png';
