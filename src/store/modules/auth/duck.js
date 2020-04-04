@@ -18,17 +18,17 @@ export const signOut = createAction(SIGN_OUT);
 
 const reducer = handleActions(
   {
-    [SIGN_IN_REQUEST]: state =>
-      produce(state, draft => {
+    [SIGN_IN_REQUEST]: (state) =>
+      produce(state, (draft) => {
         draft.loading = true;
       }),
-    [SIGN_IN_SUCCESS]: state =>
-      produce(state, draft => {
+    [SIGN_IN_SUCCESS]: (state) =>
+      produce(state, (draft) => {
         draft.signed = true;
         draft.loading = false;
       }),
-    [SIGN_IN_FAILURE]: state =>
-      produce(state, draft => {
+    [SIGN_IN_FAILURE]: (state) =>
+      produce(state, (draft) => {
         draft.loading = false;
       }),
     [SIGN_OUT]: () => defaultState,

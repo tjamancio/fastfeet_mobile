@@ -19,12 +19,12 @@ export default function DeliveryProblems({ route }) {
       setProblems(data);
     }
     load();
-    return () => { };
+    return () => {};
   }, [delivery.id]);
   return (
     <Background>
       <Title>{delivery.product}</Title>
-      {problems.map(problem => (
+      {problems.map((problem) => (
         <Problem key={problem.id}>
           <ProblemDescription>{problem.description}</ProblemDescription>
           <ProblemDate>

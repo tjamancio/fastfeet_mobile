@@ -70,7 +70,7 @@ class DeliveryList extends Component {
     navigate('Delivery');
   }
 
-  keyExtractor = item => String(item.id);
+  keyExtractor = (item) => String(item.id);
 
   renderItem({ item }) {
     return (
@@ -156,7 +156,7 @@ DeliveryList.propTypes = {
   status: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user.profile,
 });
 

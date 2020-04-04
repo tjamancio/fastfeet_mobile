@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
 
+import ConfirmDelivery from './pages/ConfirmDelivery';
 import Deliveries from './pages/Deliveries';
 import DeliveryDetail from './pages/DeliveryDetail';
 import DeliveryProblems from './pages/DeliveryProblems';
@@ -56,11 +57,20 @@ const DeliveryTab = () => (
         headerTintColor: colors.white,
       }}
     />
+    <Stack.Screen
+      name="ConfirmDelivery"
+      component={ConfirmDelivery}
+      options={{
+        title: 'Confirmar entrega',
+        headerTransparent: true,
+        headerTintColor: colors.white,
+      }}
+    />
   </Stack.Navigator>
 );
 
 export default function Routes() {
-  const signed = useSelector(state => state.auth.signed);
+  const signed = useSelector((state) => state.auth.signed);
   return (
     <NavigationContainer ref={navigationRef}>
       {!signed ? (
@@ -74,40 +84,40 @@ export default function Routes() {
           />
         </Stack.Navigator>
       ) : (
-          <Tab.Navigator
-            tabBarOptions={{
-              drawUnderNavBar: false,
-              activeTintColor: colors.primary,
-              style: {
-                alignItems: 'center',
-              },
-              tabStyle: {
-                paddingVertical: 5,
-              },
-            }}>
-            <Stack.Screen
-              name="Dashboard"
-              component={DeliveryTab}
-              options={{
-                title: 'Entregas',
-                // tabBarVisible: false,
-                tabBarIcon: ({ color }) => (
-                  <Icon name="menu" color={color} size={20} />
-                ),
-              }}
-            />
-            <Stack.Screen
-              name="Profile"
-              component={Profile}
-              options={{
-                title: 'Meu Perfil',
-                tabBarIcon: ({ color }) => (
-                  <Icon name="account-circle" color={color} size={20} />
-                ),
-              }}
-            />
-          </Tab.Navigator>
-        )}
+        <Tab.Navigator
+          tabBarOptions={{
+            drawUnderNavBar: false,
+            activeTintColor: colors.primary,
+            style: {
+              alignItems: 'center',
+            },
+            tabStyle: {
+              paddingVertical: 5,
+            },
+          }}>
+          <Stack.Screen
+            name="Dashboard"
+            component={DeliveryTab}
+            options={{
+              title: 'Entregas',
+              // tabBarVisible: false,
+              tabBarIcon: ({ color }) => (
+                <Icon name="menu" color={color} size={20} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              title: 'Meu Perfil',
+              tabBarIcon: ({ color }) => (
+                <Icon name="account-circle" color={color} size={20} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
+      )}
     </NavigationContainer>
   );
 }

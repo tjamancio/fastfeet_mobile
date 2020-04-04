@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['@react-native-community'],
+  extends: ['@react-native-community', "prettier", "prettier/react"],
   plugins: ["react", "react-hooks", "import", "eslint-plugin-import-helpers"],
 
   rules: {

@@ -12,7 +12,7 @@ import { Container, Form, Input } from './styles';
 
 export default function Signin() {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
+  const loading = useSelector((state) => state.auth.loading);
   const [email, setEmail] = useState('');
 
   function handleSubmit() {

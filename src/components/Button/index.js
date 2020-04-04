@@ -13,8 +13,8 @@ export default function Button({ children, loading, background, ...rest }) {
       {loading ? (
         <ActivityIndicator size="small" color={colors.white} />
       ) : (
-          <Text>{children}</Text>
-        )}
+        <Text>{children}</Text>
+      )}
     </Container>
   );
 }

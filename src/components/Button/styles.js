@@ -1,4 +1,3 @@
-import { BaseButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 import { colors, metrics } from '~/styles';

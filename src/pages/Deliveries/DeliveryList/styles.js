@@ -11,13 +11,8 @@ export const Box = styled.View`
   border: 1px solid ${colors.grayLight};
   border-radius: ${metrics.baseRadius}px;
   margin-bottom: ${metrics.baseMargin * 2}px;
-  
 
   shadow-color: ${colors.grayLight};
-  shadow-offset: {
-    width: 1px, 
-    height: 1px
-    };
   shadow-opacity: 0.25;
   shadow-radius: 2px;
   elevation: 1;
@@ -97,9 +92,23 @@ export const Value = styled.Text`
   max-width: ${metrics.screenWidth / 4}px;
 `;
 
-export const SeeDetais = styled.Text`
+export const SeeDetais = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7,
+  hitSlop: {
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
+  },
+})`
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const SeeDetaisText = styled.Text`
   font-weight: bold;
   color: ${colors.primary};
+  align-self: center;
 `;
 
 export const Footer = styled.View`

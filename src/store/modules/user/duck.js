@@ -10,7 +10,7 @@ const defaultState = {
 const reducer = handleActions(
   {
     [SIGN_IN_SUCCESS]: (state, { payload }) =>
-      produce(state, draft => {
+      produce(state, (draft) => {
         draft.profile = payload;
       }),
     [SIGN_OUT]: () => defaultState,

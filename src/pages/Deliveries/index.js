@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StatusBar, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StatusBar, TouchableOpacity, BackHandler } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,11 +23,22 @@ import {
 
 export default function Deliveries() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.profile);
+  const user = useSelector((state) => state.user.profile);
 
   const [deliveryStatus, setDeliveryStatus] = useState('pendente');
 
-  console.tron.log('teste');
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        return true;
+      }
+    );
+
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   function handleLogoutClick() {
     dispatch(signOut());

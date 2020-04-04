@@ -27,7 +27,6 @@ export default function NewDeliveryProblem({ route, navigation }) {
         err.response.data.error ||
         'Erro ao salvar mensagem. Tente novamente mais tarde!';
       Alert.alert('Atenção', error);
-      console.tron.log(err);
     } finally {
       setLoading(false);
     }

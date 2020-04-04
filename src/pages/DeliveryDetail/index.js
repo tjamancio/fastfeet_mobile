@@ -26,11 +26,19 @@ export default function DeliveryDetail({ route, navigation }) {
   const { recipient } = delivery;
 
   function handleNewDeliveryProblemClick(_delivery) {
-    navigation.navigate('NewDeliveryProblem', { delivery: _delivery });
+    if (!delivery.end_date) {
+      navigation.navigate('NewDeliveryProblem', { delivery: _delivery });
+    }
   }
 
   function handleDeliveryProblemsClick(_delivery) {
     navigation.navigate('DeliveryProblems', { delivery: _delivery });
+  }
+
+  function handleConfirmDeliveryClick(_delivery) {
+    if (!delivery.end_date) {
+      navigation.navigate('ConfirmDelivery', { delivery: _delivery });
+    }
   }
 
   return (
@@ -90,17 +98,17 @@ export default function DeliveryDetail({ route, navigation }) {
 
         <BoxOptions>
           <BoxOption onPress={() => handleNewDeliveryProblemClick(delivery)}>
-            <Icon name="highlight-off" color={colors.red} size={20} />
+            <Icon name="highlight-off" color={colors.red} size={25} />
             <BoxOptionText>Informar Problema</BoxOptionText>
           </BoxOption>
           <BoxOption
             hasBorder
             onPress={() => handleDeliveryProblemsClick(delivery)}>
-            <Icon name="info-outline" color={colors.gold} size={20} />
+            <Icon name="info-outline" color={colors.gold} size={25} />
             <BoxOptionText>Visualizar Problema</BoxOptionText>
           </BoxOption>
-          <BoxOption>
-            <Icon name="alarm-on" color={colors.primary} size={20} />
+          <BoxOption onPress={() => handleConfirmDeliveryClick(delivery)}>
+            <Icon name="alarm-on" color={colors.primary} size={25} />
             <BoxOptionText>Confirmar Entrega</BoxOptionText>
           </BoxOption>
         </BoxOptions>
@@ -116,14 +124,14 @@ DeliveryDetail.propTypes = {
         product: PropTypes.string,
         start_date: PropTypes.string,
         end_date: PropTypes.string,
-      }),
-      recipient: PropTypes.shape({
-        name: PropTypes.string,
-        street: PropTypes.string,
-        number: PropTypes.string,
-        city: PropTypes.string,
-        state: PropTypes.string,
-        postalcode: PropTypes.string,
+        recipient: PropTypes.shape({
+          name: PropTypes.string,
+          street: PropTypes.string,
+          number: PropTypes.number,
+          city: PropTypes.string,
+          state: PropTypes.string,
+          postalcode: PropTypes.string,
+        }),
       }),
     }),
   }).isRequired,

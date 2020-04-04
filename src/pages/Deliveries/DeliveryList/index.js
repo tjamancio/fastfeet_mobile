@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  FlatList,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 
 import { parseISO, format } from 'date-fns';
 import PropTypes from 'prop-types';
@@ -29,6 +24,7 @@ import {
   Label,
   Value,
   SeeDetais,
+  SeeDetaisText,
   Footer,
 } from './styles';
 
@@ -40,6 +36,7 @@ class DeliveryList extends Component {
       loading: true,
       deliveries: [],
       page: 1,
+      perPage: 2,
     };
   }
 
@@ -55,12 +52,11 @@ class DeliveryList extends Component {
   }
 
   updateStatus = () => {
-    this.setState({ page: 1, deliveries: [] });
-    this.load();
+    this.setState({ page: 1, deliveries: [] }, () => this.load());
   };
 
   load = async () => {
-    const { page, deliveries } = this.state;
+    const { page, perPage, deliveries } = this.state;
     const { user, status } = this.props;
 
     this.setState({ loading: true });
@@ -68,7 +64,7 @@ class DeliveryList extends Component {
     const delivered = status === 'pendente' ? 0 : 1;
 
     const { data } = await api.get(
-      `/deliverymen/${user.id}/deliveries?page=${page}&delivered=${delivered}`
+      `/deliverymen/${user.id}/deliveries?page=${page}&per_page=${perPage}&delivered=${delivered}`
     );
 
     this.setState({
@@ -78,11 +74,11 @@ class DeliveryList extends Component {
     });
   };
 
-  handleSeeDetaisClick = delivery => {
+  handleSeeDetaisClick = (delivery) => {
     navigate('DeliveryDetail', { delivery });
   };
 
-  keyExtractor = item => String(item.id);
+  keyExtractor = (item) => String(item.id);
 
   renderItem = ({ item }) => {
     return (
@@ -124,11 +120,11 @@ class DeliveryList extends Component {
               <Value numberOfLines={1}>{item.recipient.city}</Value>
             </View>
 
-            <TouchableOpacity
+            <SeeDetais
               activeOpacity={0.7}
               onPress={() => this.handleSeeDetaisClick(item)}>
-              <SeeDetais>Ver detalhes</SeeDetais>
-            </TouchableOpacity>
+              <SeeDetaisText>Ver detalhes</SeeDetaisText>
+            </SeeDetais>
           </Detais>
         </Box>
       </>
@@ -171,7 +167,7 @@ DeliveryList.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user.profile,
 });
 
