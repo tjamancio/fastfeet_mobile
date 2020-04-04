@@ -36,7 +36,7 @@ class DeliveryList extends Component {
       loading: true,
       deliveries: [],
       page: 1,
-      perPage: 2,
+      perPage: 10,
     };
   }
 
